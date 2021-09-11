@@ -1,0 +1,9 @@
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\bin\Debug\netcoreapp3.1\ASD.Core.deps.json
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\bin\Debug\netcoreapp3.1\ASD.Core.dll
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\bin\Debug\netcoreapp3.1\ASD.Core.pdb
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.csprojAssemblyReference.cache
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.AssemblyInfoInputs.cache
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.AssemblyInfo.cs
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.csproj.CoreCompileInputs.cache
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.dll
+C:\Labs\arquitetura-sistema-distribuido\src\building blocks\ASD.Core\obj\Debug\netcoreapp3.1\ASD.Core.pdb
