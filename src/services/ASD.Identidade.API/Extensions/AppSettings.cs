@@ -7,9 +7,9 @@ namespace ASD.Identidade.API.Extensions
 {
     public class AppSettings
     {
-        public string Secret { get; }
-        public int ExpiracaoHoras { get; }
-        public string Emissor { get; }
-        public string ValidoEm { get; }
+        public string Secret { get; set; }
+        public int ExpiracaoHoras { get; set; }
+        public string Emissor { get; set; }
+        public string ValidoEm { get; set; }
     }
 }
