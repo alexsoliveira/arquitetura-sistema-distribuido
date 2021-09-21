@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -14,9 +13,8 @@ using System.Threading.Tasks;
 
 namespace ASD.Identidade.API.Controllers
 {
-    [ApiController]
     [Route("api/identidade")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -38,7 +36,7 @@ namespace ASD.Identidade.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest();
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
 
                 var user = new IdentityUser
                 {
@@ -50,12 +48,16 @@ namespace ASD.Identidade.API.Controllers
                 var result = await _userManager.CreateAsync(user, usuarioRegistro.Senha);
 
                 if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false);
-                    return Ok(await GerarJwt(usuarioRegistro.Email));
+                {                    
+                    return CustomResponse(await GerarJwt(usuarioRegistro.Email));
                 }
 
-                return BadRequest();
+                foreach(var error in result.Errors)
+                {
+                    AdicionarErroProcessamento(error.Description);
+                }
+
+                return CustomResponse();
             }
             catch (Exception ex)
             {
@@ -68,7 +70,7 @@ namespace ASD.Identidade.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest();
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
 
                 var result = await _signInManager.PasswordSignInAsync(
                     usuarioLogin.Email, 
@@ -78,10 +80,17 @@ namespace ASD.Identidade.API.Controllers
 
                 if(result.Succeeded)
                 {
-                    return Ok(await GerarJwt(usuarioLogin.Email));
+                    return CustomResponse(await GerarJwt(usuarioLogin.Email));
                 }
 
-                return BadRequest();
+                if (result.IsLockedOut)
+                {
+                    AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas.");
+                    return CustomResponse();
+                }
+
+                AdicionarErroProcessamento("Usuário ou Senha incorretos.");
+                return CustomResponse();
             }
             catch (Exception ex)
             {
